@@ -2,9 +2,30 @@
 
 FrontPrep AI is an AI-powered frontend interview preparation platform that helps developers practice technical interviews through realistic mock interviews and receive instant AI-generated feedback.
 
-## 🚀 Project Status
+## 📈 Current Progress
 
-🚧 Currently under development.
+### ✅ Completed
+
+- Project setup using Vite
+- Project folder structure
+- Reusable Button component
+  - Variant-based styling
+  - `children` prop support
+  - Custom `className`
+- Navbar
+  - Dynamic navigation links using `.map()`
+  - Reusable Button integration
+- Hero Section
+  - Badge
+  - Heading
+  - Description
+  - Call-to-action buttons
+  - Dashboard preview placeholder
+- Features Section
+  - Reusable `FeatureCard` component
+  - Dynamic rendering using `.map()`
+  - Icons, title, and description
+  - Grid layout
 
 ## ✨ Planned Features
 
@@ -32,6 +53,7 @@ FrontPrep AI is an AI-powered frontend interview preparation platform that helps
 src/
 ├── assets/
 ├── components/
+├── common/
 ├── pages/
 ├── hooks/
 ├── utils/

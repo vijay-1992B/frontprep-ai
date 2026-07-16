@@ -1,7 +1,9 @@
-function App(){
-  return(
+import LandingPage from "./pages/LandingPage";
+
+function App() {
+  return (
     <div>
-      FrontPrep-AI
+      <LandingPage />
     </div>
   );
 }
