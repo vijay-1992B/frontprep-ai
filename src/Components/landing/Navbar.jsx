@@ -8,8 +8,8 @@ const links = [
 
 const Navbar = () => {
   return (
-    <nav className="w-full">
-      <div className=" max-w-7xl mx-auto p-4  flex justify-between items-center shadow-lg ">
+    <nav className="w-full fixed top-0 left-0 bg-white z-50 shadow-sm h-20 ">
+      <div className=" max-w-7xl mx-auto p-4  flex justify-between items-center ">
         <h1 className="font-bold text-2xl">FrontPrep AI</h1>
         <ul className="flex gap-10 ">
           {links.map((link) => (

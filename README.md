@@ -21,11 +21,31 @@ FrontPrep AI is an AI-powered frontend interview preparation platform that helps
   - Description
   - Call-to-action buttons
   - Dashboard preview placeholder
+
 - Features Section
   - Reusable `FeatureCard` component
   - Dynamic rendering using `.map()`
   - Icons, title, and description
   - Grid layout
+
+- Testimonials Section
+  - Reusable `TestimonialCard` component
+  - Dynamic rendering using `.map()`
+  - Rating, review, avatar, name, and job title
+
+- FAQ Section
+  - Reusable `FaqCard` component
+  - Dynamic rendering using `.map()`
+
+- Call-to-Action (CTA) Section
+  - Encourages users to start AI interview practice
+  - Reuses `SectionHeader` and `Button` components
+
+- Footer
+  - Reusable `FooterLinks` component
+  - Dynamic Quick Links
+  - Dynamic Resources
+  - Dynamic Social Links
 
 ## ✨ Planned Features
 

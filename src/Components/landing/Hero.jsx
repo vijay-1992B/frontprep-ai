@@ -2,7 +2,7 @@ import Button from "../common/Button";
 
 const Hero = () => {
   return (
-    <section className="w-full">
+    <section className="w-full  pt-28">
       <div className="  max-w-7xl mx-auto  px-4 py-6 flex justify-between items-center min-h-[80vh]">
         <div className="max-w-xl ">
           <div className="inline-block bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium">
@@ -20,7 +20,7 @@ const Hero = () => {
             <Button variant="ghost">Learn More</Button>
           </div>
         </div>
-        <div className="w-125 h-100 bg-gray-100 rounded-2xl shadow-lg flex items-center justify-center">
+        <div className="w-125 h-100 bg-gray-100 rounded-2xl shadow-md flex items-center justify-center">
           Dashboard Preview
         </div>
       </div>

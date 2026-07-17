@@ -1,4 +1,5 @@
 import FeatureCard from "./FeatureCard";
+import SectionHeader from "../common/SectionHeader";
 
 const features = [
   {
@@ -25,10 +26,13 @@ const features = [
 
 const Features = () => {
   return (
-    <section className="w-full py-24">
+    <section className="w-full py-16 ">
       <div className="max-w-7xl mx-auto p-4">
-        <h2 className=" text-2xl font-medium">Features</h2>
-        <p>Everything you need to prepare for frontend interviews.</p>
+        <SectionHeader
+          title="Features"
+          description="Everything you need to prepare for frontend interviews."
+        />
+
         <div className="mt-10 grid grid-cols-2 gap-8">
           {features.map((feature) => (
             <FeatureCard key={feature.title} {...feature} />
