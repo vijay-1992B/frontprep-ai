@@ -47,6 +47,28 @@ FrontPrep AI is an AI-powered frontend interview preparation platform that helps
   - Dynamic Resources
   - Dynamic Social Links
 
+- React Router setup using `createBrowserRouter`
+- Authentication routing
+  - Login page
+  - Signup page
+  - Forgot Password page
+- Reusable authentication components
+  - AuthLayout
+  - AuthInput
+  - PasswordInput
+  - Divider
+- Login UI
+  - Email input
+  - Password input
+  - Password visibility toggle
+  - Forgot Password link
+  - Google Sign-In button
+  - Create Account link
+- Improved form accessibility
+  - Proper `label` and `htmlFor` usage
+  - `aria-label` for icon-only button
+- Reusable component structure for authentication pages
+
 ## ✨ Planned Features
 
 - User Authentication
