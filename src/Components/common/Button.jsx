@@ -5,10 +5,10 @@ const variants = {
   ghost: "text-gray-700 hover:text-black ",
 };
 
-const Button = ({ children, variant = "primary" }) => {
+const Button = ({ children, variant = "primary", style }) => {
   return (
     <button
-      className={`${variants[variant] ?? variants.primary} py-2 px-4 rounded-lg cursor-pointer transition-colors font-medium`}
+      className={`${variants[variant] ?? variants.primary} ${style} py-2 px-4 rounded-lg cursor-pointer transition-colors font-medium`}
     >
       {children}
     </button>
