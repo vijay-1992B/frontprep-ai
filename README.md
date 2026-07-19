@@ -57,16 +57,16 @@ FrontPrep AI is an AI-powered frontend interview preparation platform that helps
   - AuthInput
   - PasswordInput
   - Divider
-- Login UI
-  - Email input
-  - Password input
-  - Password visibility toggle
-  - Forgot Password link
+- Authentication UI
+  - Login page
+  - Signup page
+  - Forgot Password page
   - Google Sign-In button
-  - Create Account link
+  - Navigation between authentication pages
 - Improved form accessibility
   - Proper `label` and `htmlFor` usage
-  - `aria-label` for icon-only button
+  - `aria-label` for icon-only buttons
+  - Focus styles using `focus-within`
 - Reusable component structure for authentication pages
 
 ## ✨ Planned Features
