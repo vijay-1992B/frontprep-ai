@@ -5,14 +5,17 @@ const AuthInput = ({
   value,
   id,
   onChange,
+
   ...props
 }) => {
+  console.log({ ...props });
   return (
     <div>
       <label htmlFor={id} className="block mb-2 font-medium">
         {label}
       </label>
       <input
+        name={props.name}
         id={id}
         type={type}
         value={value}

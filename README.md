@@ -68,6 +68,8 @@ FrontPrep AI is an AI-powered frontend interview preparation platform that helps
   - `aria-label` for icon-only buttons
   - Focus styles using `focus-within`
 - Reusable component structure for authentication pages
+- Form Validation
+  - Set up Validation for Login
 
 ## ✨ Planned Features
 

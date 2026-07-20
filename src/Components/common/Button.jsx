@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const variants = {
   primary: "bg-blue-600 text-white",
   secondary: "bg-gray-200 text-gray-900",
@@ -5,13 +7,14 @@ const variants = {
   ghost: "text-gray-700 hover:text-black ",
 };
 
-const Button = ({ children, variant = "primary", style }) => {
-  return (
-    <button
-      className={`${variants[variant] ?? variants.primary} ${style} py-2 px-4 rounded-lg cursor-pointer transition-colors font-medium`}
-    >
+const Button = ({ children, variant = "primary", style, path }) => {
+  const className = `${variants[variant] ?? variants.primary} ${style} py-2 px-4 rounded-lg cursor-pointer transition-colors font-medium`;
+  return path ? (
+    <Link className={className} to={path}>
       {children}
-    </button>
+    </Link>
+  ) : (
+    <button className={className}>{children}</button>
   );
 };
 

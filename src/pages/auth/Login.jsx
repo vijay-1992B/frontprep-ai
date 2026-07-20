@@ -5,8 +5,16 @@ import AuthInput from "./AuthInput";
 import { FcGoogle } from "react-icons/fc";
 import Divider from "../../components/common/Divider";
 import PasswordInput from "./PasswordInput";
+import { useState } from "react";
 
 const Login = () => {
+  const [formData, setFormData] = useState({ email: "", password: "" });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
   return (
     <AuthLayout>
       <div className="mb-6 text-center">
@@ -21,12 +29,18 @@ const Login = () => {
           label="Email"
           placeholder="Enter your email"
           id="email"
+          name="email"
+          onChange={handleInputChange}
+          value={formData.email}
         />
 
         <PasswordInput
           label="Password"
           id="password"
           placeholder="Enter your password"
+          name="password"
+          onChange={handleInputChange}
+          value={formData.password}
         />
 
         <div className="text-right">

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Button from "../common/Button";
 
 const links = [
@@ -14,12 +15,14 @@ const Navbar = () => {
         <ul className="flex gap-10 ">
           {links.map((link) => (
             <li key={link.url}>
-              <a href={link.url}>{link.name}</a>
+              <Link to={link.url}>{link.name}</Link>
             </li>
           ))}
         </ul>
         <div className="flex gap-4 ">
-          <Button variant="ghost">Login</Button>
+          <Button variant="ghost" path="/login">
+            Login
+          </Button>
           <Button>Start Free Interview</Button>
         </div>
       </div>
