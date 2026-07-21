@@ -1,7 +1,15 @@
 import { useState } from "react";
 import { LuEye, LuEyeOff } from "react-icons/lu";
 
-const PasswordInput = ({ label, placeholder, value, id, onChange }) => {
+const PasswordInput = ({
+  label,
+  placeholder,
+  value,
+  id,
+  onChange,
+  error,
+  ...props
+}) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleButtonClick = () => {
@@ -14,9 +22,12 @@ const PasswordInput = ({ label, placeholder, value, id, onChange }) => {
         {label}
       </label>
       <div
-        className="flex border px-3 py-2 items-center justify-between 
-         w-full transition rounded-md focus-within:ring-2
-       focus-within:border-blue-500 focus-within:ring-blue-500  "
+        className={`flex border px-3 py-2 items-center justify-between 
+         w-full transition rounded-md ${
+           error
+             ? "border-red-500 focus:ring-red-500 focus:border-red-500"
+             : "focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+         }`}
       >
         <input
           type={showPassword ? "text" : "password"}
@@ -24,9 +35,11 @@ const PasswordInput = ({ label, placeholder, value, id, onChange }) => {
           id={id}
           value={value}
           onChange={onChange}
+          {...props}
           className=" w-full border-none outline-none  
             "
         />
+
         <button
           className="cursor-pointer shrink-0 ml-2"
           type="button"
@@ -36,6 +49,7 @@ const PasswordInput = ({ label, placeholder, value, id, onChange }) => {
           {showPassword ? <LuEyeOff /> : <LuEye />}
         </button>
       </div>
+      {error && <p className="text-red-500 mt-1 text-sm">{error}</p>}
     </div>
   );
 };

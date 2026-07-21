@@ -6,13 +6,22 @@ import { FcGoogle } from "react-icons/fc";
 import Divider from "../../components/common/Divider";
 import PasswordInput from "./PasswordInput";
 import { useState } from "react";
+import { validateLogin } from "../../utils/validation";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
+  const [errors, setErrors] = useState({});
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const validationError = validateLogin(formData);
+
+    setErrors(validationError);
   };
 
   return (
@@ -23,7 +32,7 @@ const Login = () => {
           Continue your interview preparation
         </p>
       </div>
-      <form className="flex flex-col gap-4 ">
+      <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
         <AuthInput
           type="email"
           label="Email"
@@ -32,6 +41,7 @@ const Login = () => {
           name="email"
           onChange={handleInputChange}
           value={formData.email}
+          error={errors.email}
         />
 
         <PasswordInput
@@ -41,6 +51,7 @@ const Login = () => {
           name="password"
           onChange={handleInputChange}
           value={formData.password}
+          error={errors.password}
         />
 
         <div className="text-right">
@@ -52,7 +63,7 @@ const Login = () => {
           </Link>
         </div>
 
-        <Button>Login</Button>
+        <Button type="submit">Login</Button>
       </form>
       <Divider />
       <Button

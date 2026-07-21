@@ -70,6 +70,10 @@ FrontPrep AI is an AI-powered frontend interview preparation platform that helps
 - Reusable component structure for authentication pages
 - Form Validation
   - Set up Validation for Login
+  - Set up Validation for signup
+- Integrated Firebase
+- Enabled Email/Password Authentication
+- Enabled Google Authentication
 
 ## ✨ Planned Features
 
