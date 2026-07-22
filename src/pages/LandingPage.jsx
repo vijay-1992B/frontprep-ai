@@ -5,8 +5,10 @@ import Testimonial from "../Components/landing/Testimonial";
 import FAQ from "../Components/landing/FAQ";
 import CTA from "../Components/landing/CTA";
 import Footer from "../Components/landing/Footer";
+import { auth } from "../firebase";
 
 const LandingPage = () => {
+  console.log(auth);
   return (
     <div>
       <Navbar />

@@ -7,6 +7,9 @@ import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { useState } from "react";
 import { validateSignup } from "../../utils/validation";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { auth } from "../../firebase";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -22,11 +25,38 @@ const Signup = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationError = validateSignup(formData);
-    console.log(validationError);
-    setErrors(validationError);
+
+    if (Object.keys(validationError).length > 0) {
+      setErrors(validationError);
+      return;
+    }
+
+    const { email, password, fullName } = formData;
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+      const user = userCredential.user;
+
+      await updateProfile(user, {
+        displayName: fullName,
+      });
+      navigate("/dashboard");
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      if (errorCode === "auth/email-already-in-use") {
+        setErrors({ email: "An account with this email already exists." });
+      }
+    }
   };
 
   return (
