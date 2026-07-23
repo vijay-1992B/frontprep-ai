@@ -78,6 +78,8 @@ FrontPrep AI is an AI-powered frontend interview preparation platform that helps
 - Updated User Profile with Display Name
 - Redirect to Dashboard after Successful Signup
 - Added Firebase Error Handling for Signup
+- Implemented User Signin with Firebase Authentication
+- Redirect to Dashboard after Successful Signin
 
 ## ✨ Planned Features
 

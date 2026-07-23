@@ -7,21 +7,41 @@ import Divider from "../../components/common/Divider";
 import PasswordInput from "./PasswordInput";
 import { useState } from "react";
 import { validateLogin } from "../../utils/validation";
+import { auth } from "../../firebase";
+import { useNavigate } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationError = validateLogin(formData);
 
-    setErrors(validationError);
+    if (Object.keys(validationError).length > 0) {
+      setErrors(validationError);
+      return;
+    }
+
+    const { email, password } = formData;
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+      navigate("/dashboard");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

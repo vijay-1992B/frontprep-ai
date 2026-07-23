@@ -44,7 +44,9 @@ const Signup = () => {
         email,
         password,
       );
+
       const user = userCredential.user;
+      console.log(userCredential);
 
       await updateProfile(user, {
         displayName: fullName,

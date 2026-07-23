@@ -8,7 +8,6 @@ import Footer from "../Components/landing/Footer";
 import { auth } from "../firebase";
 
 const LandingPage = () => {
-  console.log(auth);
   return (
     <div>
       <Navbar />
