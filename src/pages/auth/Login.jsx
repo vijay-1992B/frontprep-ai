@@ -19,6 +19,7 @@ const Login = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    setErrors((prev) => ({ ...prev, firebase: "" }));
   };
 
   const handleSubmit = async (e) => {
@@ -40,7 +41,12 @@ const Login = () => {
       );
       navigate("/dashboard");
     } catch (error) {
-      console.log(error);
+      if (error.code === "auth/invalid-credential") {
+        setErrors((prev) => ({
+          ...prev,
+          firebase: "Invalid email or password.",
+        }));
+      }
     }
   };
 
@@ -73,6 +79,9 @@ const Login = () => {
           value={formData.password}
           error={errors.password}
         />
+        {errors.firebase && (
+          <p className="text-red-500 text-sm">{errors.firebase}</p>
+        )}
 
         <div className="text-right">
           <Link
