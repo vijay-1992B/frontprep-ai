@@ -7,14 +7,21 @@ const variants = {
   ghost: "text-gray-700 hover:text-black ",
 };
 
-const Button = ({ children, type, variant = "primary", style, path }) => {
+const Button = ({
+  children,
+  type,
+  variant = "primary",
+  style,
+  path,
+  onClick,
+}) => {
   const className = `${variants[variant] ?? variants.primary} ${style} py-2 px-4 rounded-lg cursor-pointer transition-colors font-medium`;
   return path ? (
     <Link className={className} to={path}>
       {children}
     </Link>
   ) : (
-    <button type={type} className={className}>
+    <button onClick={onClick} type={type} className={className}>
       {children}
     </button>
   );

@@ -80,9 +80,14 @@ FrontPrep AI is an AI-powered frontend interview preparation platform that helps
 - Added Firebase Error Handling for Signup
 - Implemented User Signin with Firebase Authentication
 - Redirect to Dashboard after Successful Signin
-- Integrated Redux Toolkit
-- Configured Redux Store
-- Created User Slice for Authentication State
+- Configured Redux Store using Redux Toolkit
+- Created User Slice for authentication state management
+- Learned Redux flow (Store → Slice → Reducer → Action → State Update)
+- Implemented Protected Routes for authenticated pages
+- Refactored application routing using React Router Layout Routes
+- Added `Outlet`-based layout structure for shared application logic
+- Integrated `onAuthStateChanged` with the application layout to persist authentication state
+- Connected Firebase Authentication with Redux for global user state management
 
 ## ✨ Planned Features
 
