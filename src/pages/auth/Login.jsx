@@ -9,12 +9,17 @@ import { useState } from "react";
 import { validateLogin } from "../../utils/validation";
 import { auth } from "../../firebase";
 import { useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+} from "firebase/auth";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+  const provider = new GoogleAuthProvider();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -47,6 +52,14 @@ const Login = () => {
           firebase: "Invalid email or password.",
         }));
       }
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithPopup(auth, provider);
+    } catch (error) {
+      console.error(error.code);
     }
   };
 
@@ -96,6 +109,7 @@ const Login = () => {
       </form>
       <Divider />
       <Button
+        onClick={handleGoogleSignIn}
         variant="secondary"
         style="flex items-center justify-center gap-2  mb-6 w-full"
       >
