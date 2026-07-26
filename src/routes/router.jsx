@@ -6,6 +6,7 @@ import ForgotPassword from "../pages/auth/ForgotPassword";
 import Dashboard from "../pages/Dashboard";
 import ProtectedRoutes from "./ProtectedRoutes";
 import App from "../App";
+import PublicRoutes from "./PublicRotes";
 
 const router = createBrowserRouter([
   {
@@ -17,19 +18,31 @@ const router = createBrowserRouter([
         element: <LandingPage />,
       },
       {
-        path: "/login",
-        element: <Login />,
+        path: "login",
+        element: (
+          <PublicRoutes>
+            <Login />
+          </PublicRoutes>
+        ),
       },
       {
-        path: "/signup",
-        element: <Signup />,
+        path: "signup",
+        element: (
+          <PublicRoutes>
+            <Signup />
+          </PublicRoutes>
+        ),
       },
       {
-        path: "/forgot-password",
-        element: <ForgotPassword />,
+        path: "forgot-password",
+        element: (
+          <PublicRoutes>
+            <ForgotPassword />
+          </PublicRoutes>
+        ),
       },
       {
-        path: "/dashboard",
+        path: "dashboard",
         element: (
           <ProtectedRoutes>
             <Dashboard />

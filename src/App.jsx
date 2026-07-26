@@ -16,10 +16,8 @@ function App() {
       if (user) {
         const { uid, displayName, email } = user;
         dispatch(addUser({ uid: uid, displayName: displayName, email: email }));
-        navigate("/dashboard");
       } else {
         dispatch(removeUser());
-        navigate("/");
       }
     });
     return () => unsubscribe();
