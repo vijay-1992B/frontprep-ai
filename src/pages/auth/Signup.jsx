@@ -10,6 +10,8 @@ import { validateSignup } from "../../utils/validation";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../firebase";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../../store/slices/userSlice";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -19,6 +21,7 @@ const Signup = () => {
     confirmPassword: "",
   });
   const [errors, setErrors] = useState({});
+  const dispatch = useDispatch();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -50,7 +53,16 @@ const Signup = () => {
       await updateProfile(user, {
         displayName: fullName,
       });
-      navigate("/dashboard");
+
+      const { email: firebaseEmail, uid, displayName } = user;
+
+      dispatch(
+        addUser({
+          email: firebaseEmail,
+          uid,
+          displayName,
+        }),
+      );
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;

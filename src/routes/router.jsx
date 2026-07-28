@@ -3,7 +3,7 @@ import LandingPage from "../pages/LandingPage";
 import Login from "../pages/auth/Login";
 import Signup from "../pages/auth/Signup";
 import ForgotPassword from "../pages/auth/ForgotPassword";
-import Dashboard from "../pages/Dashboard";
+import Dashboard from "../pages/dashboard/Dashboard";
 import ProtectedRoutes from "./ProtectedRoutes";
 import App from "../App";
 import PublicRoutes from "./PublicRotes";

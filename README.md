@@ -88,6 +88,14 @@ FrontPrep AI is an AI-powered frontend interview preparation platform that helps
 - Created Protected Routes for private pages
 - Created Public Routes for authentication pages
 - Refactored routing using Layout Routes (`App` + `Outlet`)
+- Added authentication loading state to prevent page flicker during refresh
+- Improved authentication flow by separating Redux updates from route navigation
+- Organized dashboard structure
+  - Created `dashboard` folder for pages
+  - Created `DashboardLayout`
+  - Created `Sidebar`
+  - Created `Header`
+- Planned scalable dashboard layout using nested routes and `<Outlet />`
 
 ## ✨ Planned Features
 

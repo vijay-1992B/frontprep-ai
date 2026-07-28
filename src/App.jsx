@@ -8,7 +8,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 
 function App() {
   const dispatch = useDispatch();
-  const user = useSelector((store) => store.user);
+  const user = useSelector((store) => store.user.user);
   const navigate = useNavigate();
 
   useEffect(() => {
