@@ -5,13 +5,14 @@ const Header = () => {
   const name = user?.displayName || "User";
 
   return (
-    <div className="flex justify-between items-center p-6">
-      <h1 className="font-semibold text-xl">Dashboard</h1>
-      <div className="flex gap-0.5 items-center">
+    <header className="flex h-20 items-center justify-between border-b border-gray-200 bg-white px-8">
+      <h1 className="text-xl font-semibold">Dashboard</h1>
+
+      <div className="flex items-center gap-2">
         <div className="text-xl">🧛‍♀️</div>
-        <p>{`Hi ${name}`}</p>
+        <p>Hi {name}</p>
       </div>
-    </div>
+    </header>
   );
 };
 
