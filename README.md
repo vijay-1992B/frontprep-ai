@@ -100,6 +100,10 @@ FrontPrep AI is an AI-powered frontend interview preparation platform that helps
 - Added reusable Sidebar and Header components
 - Built Dashboard Home page structure
 - Configured dashboard navigation using `NavLink` with active route highlighting
+- Built Dashboard Home page
+- Added reusable `StatCard` and `ActionCard` components
+- Rendered dashboard sections dynamically using `.map()`
+- Improved Dashboard UI with stats, quick actions, and hover effects
 
 ## ✨ Planned Features
 
