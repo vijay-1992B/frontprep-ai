@@ -108,6 +108,10 @@ FrontPrep AI is an AI-powered frontend interview preparation platform that helps
 - Created reusable `ActivityCard` component
 - Displayed recent activities dynamically using `.map()`
 - Improved Dashboard UI with activity feed and hover interactions
+- Built Mock Interview setup page
+- Added interview configuration form (Topic, Difficulty, Questions, Interview Type)
+- Designed responsive interview setup card
+- Added Start Interview action and AI helper message
 
 ## ✨ Planned Features
 
