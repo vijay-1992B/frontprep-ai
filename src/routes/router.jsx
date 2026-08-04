@@ -11,6 +11,7 @@ import Feedback from "../pages/dashboard/Feedback";
 import Profile from "../pages/dashboard/Profile";
 import MockInterview from "../pages/dashboard/MockInterview";
 import DashboardLayout from "../components/dashboard/DashboardLayout";
+import InterviewSession from "../pages/dashboard/InterviewSession";
 
 const router = createBrowserRouter([
   {
@@ -67,7 +68,16 @@ const router = createBrowserRouter([
           },
           {
             path: "mock-interview",
-            element: <MockInterview />,
+            children: [
+              {
+                index: true,
+                element: <MockInterview />,
+              },
+              {
+                path: "session",
+                element: <InterviewSession />,
+              },
+            ],
           },
         ],
       },

@@ -112,6 +112,11 @@ FrontPrep AI is an AI-powered frontend interview preparation platform that helps
 - Added interview configuration form (Topic, Difficulty, Questions, Interview Type)
 - Designed responsive interview setup card
 - Added Start Interview action and AI helper message
+- Created interview state with Redux Toolkit
+- Integrated Gemini API for AI question generation
+- Stored generated questions in Redux
+- Added interview session routing
+- Connected setup page to session flow
 
 ## ✨ Planned Features
 
