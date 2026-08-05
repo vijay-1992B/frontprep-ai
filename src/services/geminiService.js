@@ -4,7 +4,7 @@ const ai = new GoogleGenAI({
   apiKey: import.meta.env.VITE_GEMINI_API_KEY,
 });
 
-export const generateQuestions = async (prompt) => {
+export const generateGeminiResponse = async (prompt) => {
   try {
     const response = await ai.interactions.create({
       model: "gemini-3.6-flash",

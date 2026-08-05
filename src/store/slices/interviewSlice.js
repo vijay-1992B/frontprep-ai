@@ -6,6 +6,7 @@ const initialState = {
   answers: [],
   loading: false,
   error: null,
+  feedback: null,
 };
 
 const interviewSlice = createSlice({
@@ -15,7 +16,8 @@ const interviewSlice = createSlice({
     startInterview: (state, action) => {
       state.questions = action.payload;
       state.currentQuestionIndex = 0;
-      state.answers = [];
+      state.answers = Array(action.payload.length).fill("");
+      state.feedback = null;
       state.error = null;
     },
     nextQuestion: (state) => {
@@ -28,9 +30,15 @@ const interviewSlice = createSlice({
         state.currentQuestionIndex--;
       }
     },
-    saveAnswer: (state, action) => {},
+    saveAnswer: (state, action) => {
+      const { questionIndex, answer } = action.payload;
+      state.answers[questionIndex] = answer;
+    },
     resetInterview: () => {
       return { ...initialState };
+    },
+    setFeedback: (state, action) => {
+      state.feedback = action.payload;
     },
   },
 });
@@ -41,6 +49,7 @@ export const {
   previousQuestion,
   saveAnswer,
   resetInterview,
+  setFeedback,
 } = interviewSlice.actions;
 
 export default interviewSlice.reducer;

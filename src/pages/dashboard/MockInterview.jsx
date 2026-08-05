@@ -1,4 +1,4 @@
-import InterviewCard from "../../components/InterviewCard";
+import InterviewCard from "../../components/interview/InterviewCard";
 
 const MockInterview = () => {
   return (

@@ -1,4 +1,4 @@
-import Button from "./common/Button";
+import Button from "../common/Button";
 import { useState } from "react";
 import {
   INITIAL_FORM_DATA,
@@ -6,12 +6,12 @@ import {
   QUESTION_COUNTS,
   DIFFICULTY_LEVELS,
   INTERVIEW_TYPES,
-} from "../constants/interviewOptions";
+} from "../../constants/interviewOptions";
 
-import { generateInterviewPrompt } from "../utils/interviewPrompt";
-import { generateQuestions } from "../services/geminiService";
+import { generateInterviewPrompt } from "../../utils/interviewPrompt";
+import { generateGeminiResponse } from "../../services/geminiService";
 import { useDispatch } from "react-redux";
-import { startInterview } from "../store/slices/interviewSlice";
+import { startInterview } from "../../store/slices/interviewSlice";
 import { useNavigate } from "react-router-dom";
 
 const InterviewCard = () => {
@@ -35,7 +35,7 @@ const InterviewCard = () => {
     const prompt = generateInterviewPrompt(formData);
 
     try {
-      const jsonString = await generateQuestions(prompt);
+      const jsonString = await generateGeminiResponse(prompt);
       const data = JSON.parse(jsonString);
       dispatch(startInterview(data));
       navigate("/dashboard/mock-interview/session");

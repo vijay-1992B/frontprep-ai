@@ -14,14 +14,26 @@ const Button = ({
   style,
   path,
   onClick,
+  disabled = false,
 }) => {
-  const className = `${variants[variant] ?? variants.primary} ${style} py-2 px-4 rounded-lg cursor-pointer transition-colors font-medium`;
+  const className = `${variants[variant] ?? variants.primary} ${style} 
+   py-2 px-4 rounded-lg  transition-colors font-medium   ${
+     disabled
+       ? "cursor-not-allowed opacity-50"
+       : "cursor-pointer hover:opacity-90"
+   }
+`;
   return path ? (
     <Link className={className} to={path}>
       {children}
     </Link>
   ) : (
-    <button onClick={onClick} type={type} className={className}>
+    <button
+      onClick={onClick}
+      type={type}
+      disabled={disabled}
+      className={className}
+    >
       {children}
     </button>
   );
