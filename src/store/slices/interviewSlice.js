@@ -40,6 +40,19 @@ const interviewSlice = createSlice({
     setFeedback: (state, action) => {
       state.feedback = action.payload;
     },
+    startLoading: (state) => {
+      state.loading = true;
+      state.error = null;
+    },
+
+    stopLoading: (state) => {
+      state.loading = false;
+    },
+
+    setError: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
 });
 
@@ -50,6 +63,9 @@ export const {
   saveAnswer,
   resetInterview,
   setFeedback,
+  startLoading,
+  stopLoading,
+  setError,
 } = interviewSlice.actions;
 
 export default interviewSlice.reducer;

@@ -3,7 +3,10 @@ import Button from "../common/Button";
 import {
   nextQuestion,
   previousQuestion,
+  setError,
   setFeedback,
+  startLoading,
+  stopLoading,
 } from "../../store/slices/interviewSlice";
 import { useNavigate } from "react-router-dom";
 import { generateFeedbackPrompt } from "../../utils/feedbackPrompt";
@@ -12,7 +15,9 @@ import { generateGeminiResponse } from "../../services/geminiService";
 const InterviewNavigation = ({ current, total }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { questions, answers } = useSelector((store) => store.interview);
+  const { questions, answers, loading } = useSelector(
+    (store) => store.interview,
+  );
 
   const handlePrevious = () => {
     dispatch(previousQuestion());
@@ -23,14 +28,20 @@ const InterviewNavigation = ({ current, total }) => {
   };
 
   const handleFinish = async () => {
-    const prompt = generateFeedbackPrompt(questions, answers);
+    dispatch(startLoading());
     try {
+      const prompt = generateFeedbackPrompt(questions, answers);
       const response = await generateGeminiResponse(prompt);
       const feedback = JSON.parse(response);
       dispatch(setFeedback(feedback));
       navigate("/dashboard/interview-feedback");
     } catch (error) {
       console.error(error);
+      dispatch(
+        setError("Failed to generate interview feedback. Please try again."),
+      );
+    } finally {
+      dispatch(stopLoading());
     }
   };
 
@@ -49,7 +60,7 @@ const InterviewNavigation = ({ current, total }) => {
           Next
         </Button>
       ) : (
-        <Button type="button" onClick={handleFinish}>
+        <Button type="button" disabled={loading} onClick={handleFinish}>
           Finish Interview
         </Button>
       )}

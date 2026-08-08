@@ -10,14 +10,22 @@ import {
 
 import { generateInterviewPrompt } from "../../utils/interviewPrompt";
 import { generateGeminiResponse } from "../../services/geminiService";
-import { useDispatch } from "react-redux";
-import { startInterview } from "../../store/slices/interviewSlice";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  startInterview,
+  startLoading,
+  stopLoading,
+  setError,
+} from "../../store/slices/interviewSlice";
 import { useNavigate } from "react-router-dom";
+import LoadingPage from "../common/LoadingPage";
+import ErrorMessage from "../common/ErrorMessage";
 
 const InterviewCard = () => {
   const [formData, setFormData] = useState({ ...INITIAL_FORM_DATA });
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { loading, error } = useSelector((store) => store.interview);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -31,22 +39,32 @@ const InterviewCard = () => {
   // Generate interview based on selected options
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const prompt = generateInterviewPrompt(formData);
+    dispatch(startLoading());
 
     try {
+      const prompt = generateInterviewPrompt(formData);
       const jsonString = await generateGeminiResponse(prompt);
       const data = JSON.parse(jsonString);
       dispatch(startInterview(data));
       navigate("/dashboard/mock-interview/session");
-      console.log(data);
     } catch (error) {
       console.error(error);
+      dispatch(
+        setError("Failed to generate your interview. Please try again."),
+      );
+    } finally {
+      dispatch(stopLoading());
     }
   };
 
-  return (
+  return loading ? (
+    <LoadingPage
+      title="Preparing Your Interview"
+      message="We're generating questions based on your preferences..."
+    />
+  ) : (
     <div className="max-w-lg mx-auto rounded-xl border border-gray-200 bg-white p-8 shadow-sm">
+      {error && <ErrorMessage message={error} />}
       <div className="text-center">
         <h1 className="text-3xl font-bold ">Mock Interview</h1>
         <h2 className="mt-4 text-xl font-semibold">Create Your Interview </h2>
