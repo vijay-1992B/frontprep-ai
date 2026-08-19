@@ -14,6 +14,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
+import { saveUserDetails } from "../../services/firestore";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -44,6 +45,7 @@ const Login = () => {
         email,
         password,
       );
+      saveUserDetails();
       navigate("/dashboard");
     } catch (error) {
       if (error.code === "auth/invalid-credential") {

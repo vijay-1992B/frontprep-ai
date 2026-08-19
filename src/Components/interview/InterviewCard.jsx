@@ -20,6 +20,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import LoadingPage from "../common/LoadingPage";
 import ErrorMessage from "../common/ErrorMessage";
+import { addInterview, saveUserDetails } from "../../services/firestore";
 
 const InterviewCard = () => {
   const [formData, setFormData] = useState({ ...INITIAL_FORM_DATA });
@@ -36,7 +37,6 @@ const InterviewCard = () => {
     }));
   };
 
-  // Generate interview based on selected options
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(startLoading());
@@ -45,7 +45,14 @@ const InterviewCard = () => {
       const prompt = generateInterviewPrompt(formData);
       const jsonString = await generateGeminiResponse(prompt);
       const data = JSON.parse(jsonString);
-      dispatch(startInterview(data));
+      console.log(data);
+      const interviewId = await addInterview(formData, data);
+      dispatch(
+        startInterview({
+          questions: data,
+          interviewId,
+        }),
+      );
       navigate("/dashboard/mock-interview/session");
     } catch (error) {
       console.error(error);

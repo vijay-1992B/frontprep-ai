@@ -7,6 +7,7 @@ const initialState = {
   loading: false,
   error: null,
   feedback: null,
+  interviewId: null,
 };
 
 const interviewSlice = createSlice({
@@ -14,9 +15,10 @@ const interviewSlice = createSlice({
   initialState,
   reducers: {
     startInterview: (state, action) => {
-      state.questions = action.payload;
+      state.questions = action.payload.questions;
+      state.interviewId = action.payload.interviewId;
       state.currentQuestionIndex = 0;
-      state.answers = Array(action.payload.length).fill("");
+      state.answers = Array(action.payload.questions.length).fill("");
       state.feedback = null;
       state.error = null;
     },

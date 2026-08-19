@@ -1,9 +1,6 @@
-
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-
-
-
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDDvnAcPwjqkD8GHCBvCZd55OKzOfFm3I0",
@@ -11,11 +8,10 @@ const firebaseConfig = {
   projectId: "frontprep-ai-a9b13",
   storageBucket: "frontprep-ai-a9b13.firebasestorage.app",
   messagingSenderId: "69750081741",
-  appId: "1:69750081741:web:8da50f8eb80857c0e14184"
+  appId: "1:69750081741:web:8da50f8eb80857c0e14184",
 };
 
+const app = initializeApp(firebaseConfig);
 
- const app = initializeApp(firebaseConfig);
-
- export const auth = getAuth(app);
-
+export const auth = getAuth(app);
+export const db = getFirestore(app);

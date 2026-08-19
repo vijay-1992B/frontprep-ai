@@ -129,6 +129,35 @@ FrontPrep AI is an AI-powered frontend interview preparation platform that helps
 - Added Redux error and loading state handling.
 - Added error handling for Gemini API failures.
 
+- Learned and implemented Firestore fundamentals
+  - Collections, documents, fields, document IDs, and subcollections
+  - CRUD operations
+  - Authentication vs authorization
+  - Firestore security rules
+  - Document references and queries
+- Created and configured Firestore `(default)` database
+- Connected Firestore with the React application using `getFirestore`
+- Created user documents using Firebase Auth UID
+- Implemented saving and reading user details from Firestore
+- Implemented updating and deleting Firestore documents
+- Created user-specific interview documents
+- Stored interview metadata
+  - Topic
+  - Difficulty
+  - Question count
+  - Interview type
+  - Interview status
+- Created `questions` subcollection for each interview
+- Stored each generated interview question as an individual Firestore document
+- Used question IDs as Firestore question document IDs
+- Stored generated questions and expected answers in Firestore
+- Stored the current `interviewId` in Redux
+- Persisted user answers to the corresponding Firestore question documents
+- Saved final interview answer before generating AI feedback
+- Stored overall AI interview score and summary in Firestore
+- Updated interview status to `completed` after successful feedback generation
+- Added interview timestamps for tracking interview progress
+
 ## ✨ Planned Features
 
 - User Authentication

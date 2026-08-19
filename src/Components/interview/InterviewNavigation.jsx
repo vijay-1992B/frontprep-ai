@@ -11,32 +11,104 @@ import {
 import { useNavigate } from "react-router-dom";
 import { generateFeedbackPrompt } from "../../utils/feedbackPrompt";
 import { generateGeminiResponse } from "../../services/geminiService";
+import { doc, updateDoc } from "firebase/firestore";
+import { auth, db } from "../../firebase";
 
 const InterviewNavigation = ({ current, total }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { questions, answers, loading } = useSelector(
-    (store) => store.interview,
-  );
+  const { questions, currentQuestionIndex, answers, loading, interviewId } =
+    useSelector((store) => store.interview);
 
   const handlePrevious = () => {
     dispatch(previousQuestion());
   };
 
-  const handleNext = () => {
-    dispatch(nextQuestion());
+  const handleNext = async () => {
+    try {
+      const currentQuestionId = questions[currentQuestionIndex].id;
+      const answer = answers[currentQuestionIndex];
+
+      const user = auth.currentUser;
+
+      if (!user) {
+        throw new Error("User is not authenticated");
+      }
+
+      const questionRef = doc(
+        db,
+        "users",
+        user.uid,
+        "interviews",
+        interviewId,
+        "questions",
+        String(currentQuestionId),
+      );
+
+      await updateDoc(questionRef, {
+        userAnswer: answer,
+      });
+
+      dispatch(nextQuestion());
+    } catch (error) {
+      console.error("Failed to save answer:", error);
+    }
   };
 
   const handleFinish = async () => {
     dispatch(startLoading());
+
     try {
+      const user = auth.currentUser;
+
+      if (!user) {
+        throw new Error("User is not authenticated");
+      }
+
+      // Save final answer
+      const currentQuestionId = questions[currentQuestionIndex].id;
+      const answer = answers[currentQuestionIndex];
+
+      const questionRef = doc(
+        db,
+        "users",
+        user.uid,
+        "interviews",
+        interviewId,
+        "questions",
+        String(currentQuestionId),
+      );
+
+      await updateDoc(questionRef, {
+        userAnswer: answer,
+      });
+
+      // Generate AI feedback
       const prompt = generateFeedbackPrompt(questions, answers);
       const response = await generateGeminiResponse(prompt);
       const feedback = JSON.parse(response);
+
+      // Update interview with overall feedback
+      const interviewRef = doc(
+        db,
+        "users",
+        user.uid,
+        "interviews",
+        interviewId,
+      );
+
+      await updateDoc(interviewRef, {
+        score: feedback.score,
+        summary: feedback.summary,
+        status: "completed",
+        completedAt: new Date(),
+      });
+
       dispatch(setFeedback(feedback));
       navigate("/dashboard/interview-feedback");
     } catch (error) {
       console.error(error);
+
       dispatch(
         setError("Failed to generate interview feedback. Please try again."),
       );
