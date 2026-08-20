@@ -88,6 +88,27 @@ const InterviewNavigation = ({ current, total }) => {
       const response = await generateGeminiResponse(prompt);
       const feedback = JSON.parse(response);
 
+      await Promise.all(
+        feedback.feedback.map((item) => {
+          const questionRef = doc(
+            db,
+            "users",
+            user.uid,
+            "interviews",
+            interviewId,
+            "questions",
+            String(item.questionId),
+          );
+
+          return updateDoc(questionRef, {
+            strengths: item.strengths,
+            weaknesses: item.weaknesses,
+            improvements: item.improvements,
+            idealAnswer: item.idealAnswer,
+          });
+        }),
+      );
+
       // Update interview with overall feedback
       const interviewRef = doc(
         db,

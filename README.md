@@ -157,6 +157,14 @@ FrontPrep AI is an AI-powered frontend interview preparation platform that helps
 - Stored overall AI interview score and summary in Firestore
 - Updated interview status to `completed` after successful feedback generation
 - Added interview timestamps for tracking interview progress
+- Built Interview History page
+- Integrated Firestore reads using `getDocs()`
+- Created reusable `InterviewHistoryCard` component
+- Displayed real user interview data from Firestore
+- Added interview creation timestamps using `createdAt`
+- Implemented Firestore queries using `query()` and `orderBy()`
+- Sorted interview history by newest interviews first
+- Formatted Firestore timestamps for UI display
 
 ## ✨ Planned Features
 

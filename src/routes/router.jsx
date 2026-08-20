@@ -12,6 +12,7 @@ import MockInterview from "../pages/dashboard/MockInterview";
 import DashboardLayout from "../components/dashboard/DashboardLayout";
 import InterviewSession from "../pages/dashboard/InterviewSession";
 import InterviewFeedback from "../pages/dashboard/InterviewFeedback";
+import InterviewHistory from "../pages/dashboard/InterviewHistory";
 
 const router = createBrowserRouter([
   {
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
           {
             path: "profile",
             element: <Profile />,
+          },
+          {
+            path: "interview-history",
+            element: <InterviewHistory />,
           },
           {
             path: "mock-interview",

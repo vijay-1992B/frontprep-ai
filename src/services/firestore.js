@@ -1,4 +1,12 @@
-import { collection, doc, setDoc, addDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  setDoc,
+  addDoc,
+  getDocs,
+  query,
+  orderBy,
+} from "firebase/firestore";
 import { db, auth } from "../firebase";
 
 export const saveUserDetails = async () => {
@@ -38,6 +46,7 @@ export const addInterview = async (formData, data) => {
       questionCount: questions,
       interviewType: interviewType,
       status: "in-progress",
+      createdAt: new Date(),
     });
 
     const questionRef = collection(interviewRef, "questions");
@@ -55,4 +64,22 @@ export const addInterview = async (formData, data) => {
   } catch (error) {
     console.error("Firestore error:", error);
   }
+};
+
+export const getUserInterviews = async () => {
+  const user = auth.currentUser;
+
+  if (!user) {
+    throw new Error("User is not authenticated");
+  }
+
+  const interviewsRef = collection(db, "users", user.uid, "interviews");
+
+  const q = query(interviewsRef, orderBy("createdAt", "desc"));
+  const snapshot = await getDocs(q);
+
+  return snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
 };
